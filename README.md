@@ -4,4 +4,4 @@
 https://sacodeofficial.github.io/leafletjs-playground/
 
 ## Screenshot project 
-![maps](https://github.com/janzenfaidiban/laravel-livewire-plygrounds/assets/45115034/965e442f-7cfa-4b2b-80b3-a62932361e67](https://github.com/sacodeofficial/leafletjs-playground/blob/main/Capture.PNG)
+![modal-delete]([https://github.com/janzenfaidiban/laravel-livewire-plygrounds/assets/45115034/f7acd008-4b81-4f19-8d88-4676970b56b6](https://github.com/sacodeofficial/leafletjs-playground/blob/main/Capture.PNG?raw=true))

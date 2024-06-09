@@ -70,7 +70,7 @@ const districtLayers = {
     }).addTo(map)
 };
 
-L.control.layers(null, districtLayers).addTo(map);
+L.control.layers(null, districtLayers,{collapsed: false}).addTo(map);
 
 const sapu = L.layerGroup().addTo(map);
 const babat = L.layerGroup().addTo(map);
@@ -90,7 +90,7 @@ const babatMarkers = {
     "Jayapura Selatan": L.marker([-2.53371, 140.71813], {icon: icons.babat}).bindPopup('<b>Babat Jayapura Selatan</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Obi Pranata').addTo(babat),
 };
 
-L.control.layers(null, {"Sapu": sapu, "Babat": babat}).addTo(map);
+L.control.layers(null, {"Sapu": sapu, "Babat": babat}, {collapsed: false}).addTo(map);
 
 </script>
 </body>

@@ -30,7 +30,7 @@
 <script type="text/javascript" src="assets/geojson/heram.js"></script>
 <script type="text/javascript">
 
-const map = L.map('map').setView({lat: -2.53371, lng: 140.71813}, 11);
+const map = L.map('map').setView({lat: -2.53371, lng: 140.71813}, 12);
 
 map.createPane('labels');
 map.getPane('labels').style.zIndex = 650;
@@ -77,23 +77,59 @@ const babat = L.layerGroup().addTo(map);
 const truck = L.layerGroup().addTo(map);
 
 const icons = {
-    "sapu": L.icon({iconUrl: 'assets/img/sapu.png', iconSize: [50, 50], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
-    "babat": L.icon({iconUrl: 'assets/img/babat.png', iconSize: [50, 50], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
-    "truck": L.icon({iconUrl: 'assets/img/truck.png', iconSize: [50, 50], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
-    "tempatsampah": L.icon({iconUrl: 'assets/img/tempat-sampah.png', iconSize: [50, 50], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
+    "sapu": L.icon({iconUrl: 'assets/img/sapu.png', iconSize: [30, 30], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
+    "babat": L.icon({iconUrl: 'assets/img/babat.png', iconSize: [30, 30], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
+    "truck": L.icon({iconUrl: 'assets/img/truck.png', iconSize: [30, 30], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
+    "tempatsampah": L.icon({iconUrl: 'assets/img/tempat-sampah.png', iconSize: [30, 30], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
 };
 
 const sapuMarkers = {
     "Vim": L.marker([-2.702713, 140.8597450], {icon: icons.sapu}).bindPopup('<b>Sapu Vim</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: John Doe<br>Keterangan: Penyapu Jalan').addTo(sapu),
-    "Wahno": L.marker([-2.593637, 140.6688757], {icon: icons.sapu}).bindPopup('<b>Sapu Wahno</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Jane Doe<br>Keterangan: Penyapu Taman').addTo(sapu),
+    "Wahno": L.marker([-2.593637, 140.6688757], {icon: icons.sapu}).bindPopup('<b>Sapu Wahno</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Jane Doe<br>Keterangan: Penyapu Jalan').addTo(sapu),
+    
+    "Saga Kotaraja": L.marker([-2.5821171, 140.6599167], {icon: icons.sapu}).bindPopup('<b>Sapu Saga Kotaraja</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Welem Wanma<br>Keterangan: Penyapu Jalan').addTo(sapu),
+
+    "Telkom Kotaraja": L.marker([-2.6059367, 140.6647011], {icon: icons.sapu}).bindPopup('<b>Sapu Telkom Kotaraja</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Billy<br>Keterangan: Penyapu Jalan').addTo(sapu),
+    "Taspem Kotaraja": L.marker([-2.605926, 140.6647011], {icon: icons.sapu}).bindPopup('<b>Sapu Taspem Kotaraja</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan').addTo(sapu),
+    "Ramayana Kotaraja": L.marker([-2.6043324, 140.6710302], {icon: icons.sapu}).bindPopup('<b>Sapu Ramayana Kotaraja</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan').addTo(sapu),
+    "Brimob Kotaraja": L.marker([-2.6043217, 140.6710302], {icon: icons.sapu}).bindPopup('<b>Sapu Brimob Kotaraja</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan').addTo(sapu),
+    "Pasar Cigombong": L.marker([-4.2886502, 101.737063], {icon: icons.sapu}).bindPopup('<b>Sapu Pasar Cigombong</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: Abepura, Jayapura').addTo(sapu),
+
+    "Lapangan King City": L.marker([-2.5975359, 140.6683801], {icon: icons.sapu}).bindPopup('<b>Sapu Lapangan King City</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: Abepura, Jayapura').addTo(sapu),
+
+    "Furia Jalur 3": L.marker([-2.5945285, 140.6663858], {icon: icons.sapu}).bindPopup('<b>Sapu Furia Jalur 3</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: Abepura, Jayapura').addTo(sapu),
+
+    
+    "Pemda 2 Cigombong": L.marker([-2.5985068, 140.6677718], {icon: icons.sapu}).bindPopup('<b>Sapu Pemda 2 Cigombong</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: Abepura, Jayapura').addTo(sapu),
+
+    "Mabo": L.marker([-2.622709,140.8023828], {icon: icons.sapu}).bindPopup('<b>Sapu Mabo</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: ').addTo(sapu),
+
+    "Skow Yambe": L.marker([-2.639085, 140.832595], {icon: icons.sapu}).bindPopup('<b>Sapu Skow Yambe</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: ').addTo(sapu),
+    "Argapura": L.marker([-2.5536451,140.676892], {icon: icons.sapu}).bindPopup('<b>Sapu Argapura</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: ').addTo(sapu),
+
+    
 };
 
 const babatMarkers = {
     "Muaratami": L.marker([-2.60000, 140.66667], {icon: icons.babat}).bindPopup('<b>Babat MuaraTami</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer').addTo(babat),
+
+    "Waena": L.marker([-2.5914768,140.6300402], {icon: icons.babat}).bindPopup('<b>Babat Waena</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer').addTo(babat),
+
+
+    "Holtekamp": L.marker([-2.6063101, 140.7810175], {icon: icons.babat}).bindPopup('<b>Babat Holtekamp</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer').addTo(babat),
+
+    "Koya Koso": L.marker([-2.639424, 140.742436], {icon: icons.babat}).bindPopup('<b>Babat Koya Koso</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer').addTo(babat),
+
+    "Skow Sae": L.marker([-2.655599, 140.876181], {icon: icons.babat}).bindPopup('<b>Babat Skow Sae</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer').addTo(babat),
 };
 
 const tempatsampahMarkers = {
     "Jayapura Utara": L.marker([-2.53371, 140.71813], {icon: icons.truck}).bindPopup('<b>Tempat Sampah</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Maikel Faidiban').addTo(truck),
+    "Abe Pantai": L.marker([-2.6677966, 140.6567494], {icon: icons.truck}).bindPopup('<b>Truck Abe Pantai</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer').addTo(truck),
+
+    "Koya Barat": L.marker([-2.6943816,140.7656099], {icon: icons.truck}).bindPopup('<b>Truck Koya Barat</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer').addTo(truck),
+    "Kp. Mosso": L.marker([-2.731046, 140.900213], {icon: icons.truck}).bindPopup('<b>Truck Kp. Mosso</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer').addTo(truck),
+    "Trikora": L.marker([-2.524706, 140.714657], {icon: icons.truck}).bindPopup('<b>Truck Trikora</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer').addTo(truck),
 };
 
 

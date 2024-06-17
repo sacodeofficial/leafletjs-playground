@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Distrik Kota Jayapura</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <style>
+        .map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div id='map' class="map"></div>
+
+<script type="text/javascript" src="assets/geojson/abepura.js"></script>
+<script type="text/javascript" src="assets/geojson/abepura/wilayahAbepura01.js"></script>
+<script type="text/javascript" src="assets/geojson/abepura/wilayahAbepura02.js"></script>
+<script type="text/javascript" src="assets/geojson/abepura/wilayahAbepura03.js"></script>
+<script type="text/javascript" src="assets/geojson/muaratami.js"></script>
+<script type="text/javascript" src="assets/geojson/jayapurautara.js"></script>
+<script type="text/javascript" src="assets/geojson/jayapuraselatan.js"></script>
+<script type="text/javascript" src="assets/geojson/heram.js"></script>
+<script type="text/javascript">
+
+const map = L.map('map').setView({lat: -2.53371, lng: 140.71813}, 12);
+
+map.createPane('labels');
+map.getPane('labels').style.zIndex = 650;
+map.getPane('labels').style.pointerEvents = 'none';
+
+const cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
+
+const positron = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: cartodbAttribution
+}).addTo(map);
+
+const positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+    attribution: cartodbAttribution,
+    pane: 'labels'
+}).addTo(map);
+
+const sapu = L.layerGroup();
+const babat = L.layerGroup();
+const truck = L.layerGroup();
+
+const icons = {
+    "sapu": L.icon({iconUrl: 'assets/img/sapu.png', iconSize: [30, 30], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
+    "babat": L.icon({iconUrl: 'assets/img/babat.png', iconSize: [30, 30], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
+    "truck": L.icon({iconUrl: 'assets/img/truck.png', iconSize: [30, 30], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
+    "tempatsampah": L.icon({iconUrl: 'assets/img/tempat-sampah.png', iconSize: [30, 30], iconAnchor: [12, 41], popupAnchor: [1, -34]}),
+};
+
+const sapuMarkers = {
+    "Vim": L.marker([-2.702713, 140.8597450], {icon: icons.sapu}).bindPopup('<b>Sapu Vim</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: John Doe<br>Keterangan: Penyapu Jalan'),
+    "Wahno": L.marker([-2.593637, 140.6688757], {icon: icons.sapu}).bindPopup('<b>Sapu Wahno</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Jane Doe<br>Keterangan: Penyapu Jalan'),
+    "Saga Kotaraja": L.marker([-2.5821171, 140.6599167], {icon: icons.sapu}).bindPopup('<b>Sapu Saga Kotaraja</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Welem Wanma<br>Keterangan: Penyapu Jalan'),
+    "Telkom Kotaraja": L.marker([-2.6059367, 140.6647011], {icon: icons.sapu}).bindPopup('<b>Sapu Telkom Kotaraja</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Billy<br>Keterangan: Penyapu Jalan'),
+    "Taspem Kotaraja": L.marker([-2.605926, 140.6647011], {icon: icons.sapu}).bindPopup('<b>Sapu Taspem Kotaraja</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan'),
+    "Ramayana Kotaraja": L.marker([-2.6043324, 140.6710302], {icon: icons.sapu}).bindPopup('<b>Sapu Ramayana Kotaraja</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan'),
+    "Brimob Kotaraja": L.marker([-2.6043217, 140.6710302], {icon: icons.sapu}).bindPopup('<b>Sapu Brimob Kotaraja</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan'),
+    "Pasar Cigombong": L.marker([-4.2886502, 101.737063], {icon: icons.sapu}).bindPopup('<b>Sapu Pasar Cigombong</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: Abepura, Jayapura'),
+    "Lapangan King City": L.marker([-2.5975359, 140.6683801], {icon: icons.sapu}).bindPopup('<b>Sapu Lapangan King City</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: Abepura, Jayapura'),
+    "Furia Jalur 3": L.marker([-2.5945285, 140.6663858], {icon: icons.sapu}).bindPopup('<b>Sapu Furia Jalur 3</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: Abepura, Jayapura'),
+    "Pemda 2 Cigombong": L.marker([-2.5985068, 140.6677718], {icon: icons.sapu}).bindPopup('<b>Sapu Pemda 2 Cigombong</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: Abepura, Jayapura'),
+    "Mabo": L.marker([-2.622709,140.8023828], {icon: icons.sapu}).bindPopup('<b>Sapu Mabo</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: '),
+    "Skow Yambe": L.marker([-2.639085, 140.832595], {icon: icons.sapu}).bindPopup('<b>Sapu Skow Yambe</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: '),
+    "Argapura": L.marker([-2.5536451,140.676892], {icon: icons.sapu}).bindPopup('<b>Sapu Argapura</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Efati<br>Keterangan: Penyapu Jalan<br>Area Koordinat: '),
+};
+
+const babatMarkers = {
+    "Muaratami": L.marker([-2.60000, 140.66667], {icon: icons.babat}).bindPopup('<b>Babat MuaraTami</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer'),
+    "Waena": L.marker([-2.5914768,140.6300402], {icon: icons.babat}).bindPopup('<b>Babat Waena</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer'),
+    "Holtekamp": L.marker([-2.6063101, 140.7810175], {icon: icons.babat}).bindPopup('<b>Babat Holtekamp</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer'),
+    "Koya Koso": L.marker([-2.639424, 140.742436], {icon: icons.babat}).bindPopup('<b>Babat Koya Koso</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer'),
+    "Skow Sae": L.marker([-2.655599, 140.876181], {icon: icons.babat}).bindPopup('<b>Babat Skow Sae</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer'),
+};
+
+const tempatsampahMarkers = {
+    "Jayapura Utara": L.marker([-2.53371, 140.71813], {icon: icons.truck}).bindPopup('<b>Tempat Sampah</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Maikel Faidiban'),
+    "Abe Pantai": L.marker([-2.6677966, 140.6567494], {icon: icons.truck}).bindPopup('<b>Truck Abe Pantai</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer'),
+    "Koya Barat": L.marker([-2.6943816,140.7656099], {icon: icons.truck}).bindPopup('<b>Truck Koya Barat</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer'),
+    "Kp. Mosso": L.marker([-2.731046, 140.900213], {icon: icons.truck}).bindPopup('<b>Truck Kp. Mosso</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer'),
+    "Trikora": L.marker([-2.524706, 140.714657], {icon: icons.truck}).bindPopup('<b>Truck Trikora</b><br><img src="assets/img/avatar.png" alt="Profile Picture" style="width:100px;height:auto;"><br>Nama: Samuel Bosawer'),
+};
+
+
+
+
+const districtLayers = {
+    "Abepura": L.geoJson(geoAbepura, {
+        style: {color: "#ff0000", fillColor: "#ff0000"},
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(feature.properties.nama);
+            layer.on('add', () => {
+                sapuMarkers["Pasar Cigombong"].addTo(sapu);
+                sapuMarkers["Lapangan King City"].addTo(sapu);
+                sapuMarkers["Furia Jalur 3"].addTo(sapu);
+                sapuMarkers["Pemda 2 Cigombong"].addTo(sapu);
+                sapuMarkers["Wahno"].addTo(sapu);
+                sapuMarkers["Saga Kotaraja"].addTo(sapu);
+                sapuMarkers["Telkom Kotaraja"].addTo(sapu);
+                sapuMarkers["Taspem Kotaraja"].addTo(sapu);
+                sapuMarkers["Ramayana Kotaraja"].addTo(sapu);
+                sapuMarkers["Brimob Kotaraja"].addTo(sapu);
+                tempatsampahMarkers["Abe Pantai"].addTo(truck);
+                tempatsampahMarkers["Koya Barat"].addTo(truck);
+
+      
+            });
+            layer.on('remove', () => {
+                sapuMarkers["Pasar Cigombong"].removeFrom(sapu);
+                sapuMarkers["Lapangan King City"].removeFrom(sapu);
+                sapuMarkers["Furia Jalur 3"].removeFrom(sapu);
+                sapuMarkers["Pemda 2 Cigombong"].removeFrom(sapu);
+                sapuMarkers["Wahno"].removeFrom(sapu);
+                sapuMarkers["Saga Kotaraja"].removeFrom(sapu);
+                sapuMarkers["Telkom Kotaraja"].removeFrom(sapu);
+                sapuMarkers["Taspem Kotaraja"].removeFrom(sapu);
+                sapuMarkers["Ramayana Kotaraja"].removeFrom(sapu);
+                sapuMarkers["Brimob Kotaraja"].removeFrom(sapu);
+                tempatsampahMarkers["Abe Pantai"].removeFrom(truck);
+                tempatsampahMarkers["Koya Barat"].removeFrom(truck);
+            });
+        }
+    }).addTo(map),
+    "Muara Tami": L.geoJson(geoMuaratami, {
+        style: {color: "#eed959", fillColor: "#eed959"},
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(feature.properties.nama);
+            layer.on('add', () => {
+                sapuMarkers["Mabo"].addTo(sapu);
+                sapuMarkers["Skow Yambe"].addTo(sapu);
+                tempatsampahMarkers["Kp. Mosso"].addTo(truck);
+            });
+            layer.on('remove', () => {
+                sapuMarkers["Mabo"].removeFrom(sapu);
+                sapuMarkers["Skow Yambe"].removeFrom(sapu);
+                tempatsampahMarkers["Kp. Mosso"].removeFrom(truck);
+            });
+        }
+    }).addTo(map),
+    "Jayapura Utara": L.geoJson(geoJayapurautara, {
+        style: {color: "#00ff00", fillColor: "#00ff00"},
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(feature.properties.nama);
+            layer.on('add', () => {
+                tempatsampahMarkers["Jayapura Utara"].addTo(truck);
+            });
+            layer.on('remove', () => {
+                tempatsampahMarkers["Jayapura Utara"].removeFrom(truck);
+            });
+        }
+    }).addTo(map),
+    "Jayapura Selatan": L.geoJson(geoJayapuraselatan, {
+        style: {color: "#ffff00", fillColor: "#ffff00"},
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(feature.properties.nama);
+
+            layer.on('add', () => {
+                sapuMarkers["Argapura"].addTo(sapu);
+            });
+            layer.on('remove', () => {
+                sapuMarkers["Argapura"].removeFrom(sapu);
+            });
+
+        }
+    }).addTo(map),
+    "Heram": L.geoJson(geoHeram, {
+        style: {color: "#0000ff", fillColor: "#0000ff"},
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(feature.properties.nama);
+            layer.on('add', () => {
+                babatMarkers["Waena"].addTo(babat);
+            });
+            layer.on('remove', () => {
+                babatMarkers["Waena"].removeFrom(babat);
+            });
+        }
+    }).addTo(map),
+};
+
+
+const areaLayers = {
+    "Abepura 1": L.geoJson(geoAbepura1, {
+        style: {color:  "#000000", fillColor:  "#00ff00"},
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(feature.properties.nama);
+        }
+    }).addTo(map),
+    "Abepura 2": L.geoJson(geoAbepura2, {
+        style: {color:  "#000000", fillColor:  "#00ff00"},
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(feature.properties.nama);
+        }
+    }).addTo(map),
+    "Abepura 3": L.geoJson(geoAbepura3, {
+        style: {color:  "#000000", fillColor:  "#00ff00"},
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(feature.properties.nama);
+        }
+    }).addTo(map)
+};
+
+
+L.control.layers(null, districtLayers, {collapsed: false}).addTo(map);
+L.control.layers(null, areaLayers, {collapsed: false}).addTo(map);
+L.control.layers(null, {"Sapu": sapu, "Babat": babat, "Truck" : truck}, {collapsed: false}).addTo(map);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>GKI Papua</title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+	<style>
+		
+		.map {
+			height: 100vh;
+			width: 100%;
+		}
+	</style>
+
+	
+</head>
+<body>
+
+<div id='map' class="map"></div>
+
+<script type="text/javascript" src="assets/geojson/jayapura.js"></script>
+
+<script type="text/javascript">
+
+const map = L.map('map');
+
+map.createPane('labels');
+
+map.getPane('labels').style.zIndex = 650;
+
+map.getPane('labels').style.pointerEvents = 'none';
+
+const cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
+
+const positron =   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: cartodbAttribution
+}).addTo(map);
+
+const positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+    attribution: cartodbAttribution,
+    pane: 'labels'
+}).addTo(map);
+
+// Adjusted the map view to focus on Papua, Indonesia
+map.setView({lat: -2.533333, lng: 140.716667}, 6); // Papua, Indonesia coordinates
+
+
+</script>
+
+
+
+</body>
+</html>
